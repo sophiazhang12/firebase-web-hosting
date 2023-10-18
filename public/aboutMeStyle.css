@@ -1,0 +1,38 @@
+/* Main Body Styles */
+body {
+    font-family: 'Fredoka One', cursive; /* Playful font */
+    background-color: #FFD700; /* Gold background color */
+    text-align: center;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 36px;
+    color: #FF6347; /* Tomato red color */
+}
+
+p {
+    font-size: 20px;
+    color: #000;
+}
+
+.profile-pic {
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    border: 5px solid #FF6347; /* Tomato red border */
+}
+
+.fun-fact {
+    font-size: 24px;
+    color: #008000; /* Green color */
+}
+
+.flower-border {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
