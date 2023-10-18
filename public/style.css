@@ -1,23 +1,84 @@
+/* Main Body Styles */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Times New Roman', serif; /* Times New Roman font */
     margin: 0;
     padding: 0;
+    background-color: #050301; /* Medium gray background color */
+    color: #000;
+    line-height: 1.6;
 }
 
-.page-section {
+/* Heading Styles */
+h1, h2 {
+    text-transform: uppercase;
+    background-color: #8B0000; /* Dark red background color for headers */
+    color: #fff; /* White font color for headers */
+    text-align: center;
+    padding: 10px;
+}
+
+h1 {
+    font-size: 42px; /* Larger font size for a more dramatic effect */
+    margin-top: 20px;
+}
+
+h2 {
+    font-size: 28px; /* Larger font size for a more dramatic effect */
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+/* Paragraph Styles */
+p {
+    font-size: 20px; /* Larger font size for a more dramatic effect */
+    text-align: justify;
+    padding: 0 20px;
+}
+
+/* Code Block Styles */
+pre {
+    background-color: #000;
+    padding: 10px;
+    border: 1px solid #8B0000; /* Dark red border */
+    border-radius: 5px;
+    font-family: 'Courier New', monospace;
+    color: #8B0000; /* Dark red font color for code blocks */
+}
+
+/* Hyperlink Styles */
+a {
+    color: #007BFF;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Header Styles */
+header {
+    background-color: #000;
+    color: #fff; /* White font color for headers in header element */
+    padding: 20px 0;
+    text-align: center;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Footer Styles */
+footer {
+    background-color: #000;
+    color: #fff; /* White font color for headers in footer element */
+    text-align: center;
+    padding: 10px 0;
+}
+
+/* Page Wrapper Styles */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
     padding: 20px;
-    margin: 20px 0;
-    border: 1px solid #ccc;
-}
-
-#section1 {
-    background-color: #e6f7ff;
-}
-
-#section2 {
-    background-color: #ffe6e6;
-}
-
-#section3 {
-    background-color: #e6ffe6;
+    background-color: rgba(255, 245, 225, 0.8); /* Semi-transparent cream background */
+    border-radius: 5px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
 }
