@@ -35,4 +35,25 @@ p {
     width: 100%;
     height: 100%;
     z-index: -1;
+    opacity: 0; /* Start with 0 opacity */
+    animation: fade-oscillation 6s linear infinite; /* Adjust the duration as needed */
+}
+
+@keyframes fade-oscillation {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+
+.gif {
+    max-width: 100%; /* Ensure the GIF fits within its container */
+    display: block; /* Remove any inline spacing */
+    margin: 20px auto; /* Center the GIF horizontally */
 }

@@ -3,10 +3,14 @@
 <head>
     <title>The Case for Curly Braces on a New Line</title>
     <link rel="stylesheet" type="text/css" href="style.css">
+    
 </head>
 <body>
     <header>
         <h1>The Case for Curly Braces on a New Line</h1>
+        <p>Read about author at <a href="about.html">About Me</a>.</p>
+        <button id="switch-content" class="cursive-button">Switch Content: About Me</button>
+
     </header>
     
     <div class="container">
@@ -33,4 +37,11 @@
         <p>&copy; 2023 YourWebsite.com</p>
     </footer>
 </body>
+<script>
+    const toggleButton = document.getElementById("switch-content");
+    toggleButton.addEventListener("click", function() {
+        window.location.href = "http://127.0.0.1:5500/public/about.html"; // Replace with the correct URL for the other page
+    });
+</script>
+
 </html>

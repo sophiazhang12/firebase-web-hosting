@@ -6,14 +6,25 @@
     <title>About Me</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fredoka+One&display=swap">
     <link rel="stylesheet" type="text/css" href="aboutMeStyle.css">
+
+    <button id="toggle-button" class="cursive-button">Switch Content: Learn About the Correct Way to Implement Curly Braces in Code</button>
 </head>
 <body>
-    <h1>Welcome to Sophia's Fun Page!</h1>
-    <img src="profile-pic.jpg" alt="Sophia's Profile Picture" class="profile-pic">
+    <h1> * * * About Me * * * </h1>
     <p>Hello, I'm Sophia, and I'm all about having fun in life!</p>
     <p>Here's a fun fact about me:</p>
-    <p class="fun-fact">I can juggle flaming torches while riding a unicycle!</p>
-    <img src="animated-gif.gif" alt="Fun GIF Animation">
+    <p class="fun-fact">I can juggle flaming torches while riding a unicycle! I can also eat fifty (50) pounds of rice pudding in -2 seconds. My speed is 424 m/s on the daily basis, and have a criminal record of pirating sheet music. </p>
+
+
     <img src="flower-border.png" alt="Flower Border" class="flower-border">
+    <img src="pusheenInternet.gif" alt="Pusheen GIF" class="gif">
+
 </body>
+<script>
+    const toggleButton = document.getElementById("toggle-button");
+    toggleButton.addEventListener("click", function() {
+        window.location.href = "http://127.0.0.1:5500/public/index.html"; // Replace with the correct URL for the other page
+    });
+</script>
+
 </html>
