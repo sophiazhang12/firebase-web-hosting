@@ -28,22 +28,29 @@
         window.location.href = "https://whateverprojectsophiazhang.web.app/index.html"; // Replace with the correct URL for the other page
     });
 
-    const container = document.getElementById("flower-trail");
 </script>
 <script>
-    document.addEventListener("mousemove", function(event) {
-        const flower = document.createElement("img");
-        flower.src = "flowerTrail.png"; // Replace with the path to your flower image
-        flower.classList.add("flower");
-        flower.style.left = (event.pageX - 25) + "px"; // Adjust the values as needed
-        flower.style.top = (event.pageY - 25) + "px";
-        container.appendChild(flower);
+    const container = document.getElementById("flower-trail");
 
-        // Remove the flower element after a short duration
-        setTimeout(function() {
-            container.removeChild(flower);
-        }, 1000); // Adjust the duration as needed
-    });
+    document.addEventListener("mousemove", function(event) {
+    const flower = document.createElement("img");
+    flower.src = "flowerTrail.png"; // Replace with the path to your flower image
+
+    // Set the width and height of the flower image
+    flower.style.width = "100px"; // Adjust the width as needed
+    flower.style.height = "100px"; // Adjust the height as needed
+
+    flower.style.position = "absolute";
+    flower.style.left = (event.pageX - 25) + "px"; // Adjust the values as needed
+    flower.style.top = (event.pageY - 25) + "px";
+    container.appendChild(flower);
+
+    // Remove the flower element after a short duration
+    setTimeout(function() {
+        container.removeChild(flower);
+    }, 500); // Adjust the duration as needed
+});
+
 
 </script>
 
