@@ -57,3 +57,8 @@ p {
     display: block; /* Remove any inline spacing */
     margin: 20px auto; /* Center the GIF horizontally */
 }
+
+.cursive-button {
+    font-family: 'Fredoka One', cursive;
+}
+
