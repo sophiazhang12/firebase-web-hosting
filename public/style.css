@@ -82,3 +82,7 @@ footer {
     border-radius: 5px;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
 }
+
+.timesNew-button {
+    font-family: 'Times New Roman', serif;
+}

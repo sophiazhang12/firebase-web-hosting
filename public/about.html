@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="aboutMeStyle.css">
 
     <button id="switch-content" class="cursive-button">Switch Content: Learn About the Correct Way to Implement Curly Braces in Code</button>
+
 </head>
 <body>
     <h1> * * * About Me * * * </h1>
@@ -15,9 +16,10 @@
     <p>Here's a fun fact about me:</p>
     <p class="fun-fact">I can juggle flaming torches while riding a unicycle! I can also eat fifty (50) pounds of rice pudding in -2 seconds. My speed is 424 m/s on the daily basis, and have a criminal record of pirating sheet music. </p>
 
-
     <img src="flower-border.png" alt="Flower Border" class="flower-border">
     <img src="pusheenInternet.gif" alt="Pusheen GIF" class="gif">
+
+    <div id="flower-trail"></div>
 
 </body>
 <script>
@@ -25,6 +27,24 @@
     toggleButton.addEventListener("click", function() {
         window.location.href = "https://whateverprojectsophiazhang.web.app/index.html"; // Replace with the correct URL for the other page
     });
+
+    const container = document.getElementById("flower-trail");
+</script>
+<script>
+    document.addEventListener("mousemove", function(event) {
+        const flower = document.createElement("img");
+        flower.src = "flowerTrail.png"; // Replace with the path to your flower image
+        flower.classList.add("flower");
+        flower.style.left = (event.pageX - 25) + "px"; // Adjust the values as needed
+        flower.style.top = (event.pageY - 25) + "px";
+        container.appendChild(flower);
+
+        // Remove the flower element after a short duration
+        setTimeout(function() {
+            container.removeChild(flower);
+        }, 1000); // Adjust the duration as needed
+    });
+
 </script>
 
 </html>
