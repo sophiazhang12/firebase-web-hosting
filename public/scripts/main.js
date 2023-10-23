@@ -21,19 +21,18 @@ class Main {
     displayCount() {
         this.incrementCount();
         // Update count in div id count
-        document.getElementById('count').innerHTML = 'You have visited this page ' + localStorage.getItem(this.pageViewsKey) + ' times.'
+        document.getElementById('count').innerHTML = 'You have visited this page ' + localStorage.getItem(this.pageViewsKey) + ' times.';
     }
 
-    setUpRainbowTrail ()
-    {
-        //rainbow trail
-        const container = document.getElementById("flower-trail");
+    setupRainbowTrail() {
+        const container = document.getElementById("rainbow-trail");
 
-        document.addEventListener("mousemove", function(event) {
+        // Correct the event handling
+        document.addEventListener("mousemove", (event) => {
             const flower = document.createElement("img");
-            flower.src = "rainbowTrail.png"; // Replace with the path to your flower image
+            flower.src = "rainbowTrail.png"; // Replace with the path to your rainbow image
 
-            // Set the width and height of the flower image
+            // Set the width and height of the rainbow image
             flower.style.width = "100px"; // Adjust the width as needed
             flower.style.height = "100px"; // Adjust the height as needed
 
@@ -51,8 +50,7 @@ class Main {
 }
 
 // Create an instance of the Main class
-document.mainInstance = new Main();
+const mainInstance = new Main();
 
-document.getElementById("rainbow-trail").addEventListener("mouseOver", mainInstance.setUpRainbowTrail.bind(mainInstance));
-
-
+// Bind the event listener to the "mouseover" event
+document.getElementById("rainbow-trail").addEventListener("mouseover", () => mainInstance.setupRainbowTrail());
