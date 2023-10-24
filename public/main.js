@@ -2,6 +2,9 @@ class Main {
     constructor() {
         this.pageViewsKey = 'pageViewsCount';
         this.initializeCounter();
+        this.currentCount = 0;
+        this.count = 0;
+        this.initializeButton();
         //this.displayCount();
     }
 
@@ -22,6 +25,30 @@ class Main {
     //     // Update count in div id count
     //     document.getElementById('count').innerHTML = 'You have visited this page ' + localStorage.getItem(this.pageViewsKey) + ' times.';
     // }
+
+    switchContent()
+    {
+        window.location.href = "https://whateverprojectsophiazhang.web.app/index.html"; // Replace with the correct URL for the other page
+    }
+    initializeButton() {
+        const button = document.getElementById("increment-button");
+        button.addEventListener("click", () => this.nyanBrush(button));
+    }
+
+    nyanBrush(button) {
+        this.count++;
+        button.textContent = "Number of Power-ups: " + this.count;
+        if (this.count === 10) {
+            // Play music when count reaches 10
+            const audio = new Audio('nyanMeow.mp3'); // Replace 'your-audio-file.mp3' with your audio file path
+            audio.play();
+        }
+    }
+
+    blackScreen() {
+        document.body.style.backgroundColor = "black";
+        document.getElementById("increment-button").style.display = "none";
+    }
 }
 
 const mainInstance = new Main();
@@ -64,17 +91,16 @@ function setupNyanCat(container, event) {
     }, 15); // Adjust the duration as needed
 }
 
-function switchContent (event) {
-      window.location.href = "https://whateverprojectsophiazhang.web.app/index.html"; // Replace with the correct URL for the other page
-    
-}
-
 // Event bindings outside the class
 document.addEventListener("mousemove", function(event) {
     setupRainbowTrail(document.getElementById("rainbow-trail"), event);
     setupNyanCat(document.getElementById("nyan-cat"), event);
 });
-document.addEventListener("click", function(event) {
-    switchContent(document.getElementById("switch-button"), event);
 
+
+document.getElementById('switch-content').addEventListener('click', () => {
+    mainInstance.switchContent();
 });
+document.getElementById("nyan-brush-count").addEventListener("click", () => mainInstance.nyanBrushCounter());
+
+
