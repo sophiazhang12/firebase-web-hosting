@@ -2,7 +2,7 @@ class Main {
     constructor() {
         this.pageViewsKey = 'pageViewsCount';
         this.initializeCounter();
-        this.displayCount();
+        //this.displayCount();
     }
 
     initializeCounter() {
@@ -17,11 +17,11 @@ class Main {
         localStorage.setItem(this.pageViewsKey, currentCount.toString());
     }
 
-    displayCount() {
-        this.incrementCount();
-        // Update count in div id count
-        document.getElementById('count').innerHTML = 'You have visited this page ' + localStorage.getItem(this.pageViewsKey) + ' times.';
-    }
+    // displayCount() {
+    //     this.incrementCount();
+    //     // Update count in div id count
+    //     document.getElementById('count').innerHTML = 'You have visited this page ' + localStorage.getItem(this.pageViewsKey) + ' times.';
+    // }
 }
 
 const mainInstance = new Main();
@@ -61,11 +61,20 @@ function setupNyanCat(container, event) {
     // Remove the Nyan Cat element after a short duration
     setTimeout(function() {
         container.removeChild(flower);
-    }, 100); // Adjust the duration as needed
+    }, 15); // Adjust the duration as needed
+}
+
+function switchContent (event) {
+      window.location.href = "https://whateverprojectsophiazhang.web.app/index.html"; // Replace with the correct URL for the other page
+    
 }
 
 // Event bindings outside the class
 document.addEventListener("mousemove", function(event) {
     setupRainbowTrail(document.getElementById("rainbow-trail"), event);
     setupNyanCat(document.getElementById("nyan-cat"), event);
+});
+document.addEventListener("click", function(event) {
+    switchContent(document.getElementById("switch-button"), event);
+
 });
