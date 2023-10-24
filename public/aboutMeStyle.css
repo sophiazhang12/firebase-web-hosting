@@ -78,13 +78,14 @@ p {
     background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
 }
 
+
 #strobe-gif {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
-    max-width: 200%;
-    max-height: 100%;
+    transform: translate(-50%, -50%) rotate(90deg); /* Rotate the gif 90 degrees */
+    width: 70%;
+    height: 210%;
     opacity: 50%;
 }
 
