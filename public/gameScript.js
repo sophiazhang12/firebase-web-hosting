@@ -16,6 +16,25 @@ class Game {
 
         // Handle keyboard input
         document.addEventListener('keydown', (e) => this.handleInput(e));
+
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+            apiKey: "AIzaSyBeEjuYK24GtSdcXaV1uZG-r8Bd2qFg1GY",
+            authDomain: "whateverprojectsophiazhang.firebaseapp.com",
+            projectId: "whateverprojectsophiazhang",
+            storageBucket: "whateverprojectsophiazhang.appspot.com",
+            messagingSenderId: "664431008269",
+            appId: "1:664431008269:web:dce6f1dee7c4b5c9821344",
+            measurementId: "G-4ZQYQV644W"
+        };
+
+
+        // Initialize Firebase
+        const app = firebase.initializeApp(firebaseConfig);
+
+        // Initialize Cloud Firestore and get a reference to the service
+        this.db = app.firestore(app);
     }
 
     displayScore() {
