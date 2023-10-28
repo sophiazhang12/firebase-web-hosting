@@ -124,12 +124,13 @@ class Game {
     generateCollectibles() {
         const desiredCount = 2;
         while (this.collectibles.length < desiredCount) {
-            const randomX = Math.floor(Math.random() * this.canvas.width);
-            const randomY = Math.floor(Math.random() * this.canvas.height);
+            const randomX = Math.floor(Math.random() * (this.canvas.width - 20)); // Subtract 20 to keep it within the canvas
+            const randomY = Math.floor(Math.random() * (this.canvas.height - 20)); // Subtract 20 to keep it within the canvas
             const collectible = { x: randomX, y: randomY, width: 20, height: 20 };
             this.collectibles.push(collectible);
         }
-    }    
+    }
+       
 
     checkCollision() {
         for (let i = this.collectibles.length - 1; i >= 0; i--) {
@@ -150,6 +151,7 @@ class Game {
     moveSnake() {
         const newHead = { ...this.snake[0] };
     
+        // Update the position of the new head based on the current direction
         switch (this.direction) {
             case 'up':
                 newHead.y -= 2;
@@ -165,6 +167,17 @@ class Game {
                 break;
         }
     
+        // Check if the new head is out of bounds
+        if (
+            newHead.x < 0 ||
+            newHead.x + newHead.width > this.canvas.width ||
+            newHead.y < 0 ||
+            newHead.y + newHead.height > this.canvas.height
+        ) {
+            this.gameOver();
+            return;
+        }
+    
         this.snake.unshift(newHead);
     
         while (this.snake.length > this.score + 1) {
@@ -173,6 +186,7 @@ class Game {
     
         this.snakeTail = this.snake.slice(1);
     }
+    
     
 
     update() {
