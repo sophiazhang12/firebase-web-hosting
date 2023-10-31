@@ -3,18 +3,20 @@ class Game {
         this.canvas = document.getElementById('gameCanvas');
         this.ctx = this.canvas.getContext('2d');
         this.score = 0;
-
+    
         this.snake = [{ x: 100, y: 100, width: 20, height: 20 }];
         this.snakeTail = [];
-
+    
         this.direction = 'right';
         this.moveInterval = 5;
         this.lastMoveTime = 0;
-
+    
         this.collectibles = [];
         // Call it initially to generate collectibles.
         this.generateCollectibles();
         
+        this.gameOverFlag = false; // Set this to false to start the game.
+    
         // Initialize the game
         this.update();
         document.addEventListener('keydown', (e) => this.handleInput(e));
@@ -53,18 +55,48 @@ class Game {
     }
 
     gameOver() {
-        cancelAnimationFrame(this.animationFrameId);
-
-        this.ctx.font = "30px Arial";
-        this.ctx.fillStyle = "red";
-        this.ctx.fillText("Game Over", this.canvas.width / 2 - 70, this.canvas.height / 2);
-
-        const playerInitials = prompt('Game over! Enter your initials (3 letters):');
-        if (playerInitials && playerInitials.length === 3) {
-            this.submitScore(playerInitials, this.score);
-        } else {
-            console.log('Invalid initials or user canceled submission.');
-        }
+        this.gameOverFlag = true;
+            // Stop the game loop
+            cancelAnimationFrame(this.animationFrameId);
+        
+            this.ctx.font = "30px Arial";
+            this.ctx.fillStyle = "red";
+            this.ctx.fillText("Game Over", this.canvas.width / 2 - 70, this.canvas.height / 2);
+        
+            const initialsInput = document.getElementById('initialsInput');
+            initialsInput.style.display = 'block';
+            initialsInput.focus();
+        
+            const replayButton = document.getElementById('replayButton');
+            replayButton.style.display = 'block';
+            replayButton.addEventListener('click', () => {
+                const playerInitials = initialsInput.value;
+                if (playerInitials.length === 3) {
+                    this.submitScore(playerInitials, this.score);
+                    initialsInput.style.display = 'none';
+                    replayButton.style.display = 'none';
+                    this.restartGame();
+                } else {
+                    console.log('Invalid initials. Please enter 3 letters.');
+                }
+            });
+    }
+    
+    
+    restartGame() {
+        this.gameOverFlag = false;
+        this.score = 0;
+        this.snake = [{ x: 100, y: 100, width: 20, height: 20 }];
+        this.snakeTail = [];
+        this.direction = 'right';
+        this.collectibles = [];
+        this.generateCollectibles();
+        this.update(); // Start the game over
+    
+        const replayButton = document.getElementById('replayButton');
+        const initialsInput = document.getElementById('initialsInput');
+        replayButton.style.display = 'none'; // Hide the replay button
+        initialsInput.style.display = 'none'; // Hide the initials input
     }
 
     redraw() {
@@ -192,8 +224,8 @@ class Game {
     update() {
         this.redraw();
     
-        if (this.score >= 3) {
-            this.gameOver();
+        if (this.gameOverFlag)
+        {
             return;
         }
     
@@ -206,8 +238,44 @@ class Game {
             this.moveSnake();
         }
     
-        requestAnimationFrame(() => this.update());
+        this.animationFrameId = requestAnimationFrame(() => this.update());
     }
+
+    // Function to retrieve the top 10 scores from Firestore
+    async getTopScores() {
+        try {
+            // Query Firestore to get the top 10 scores ordered by score in descending order
+            const scoresRef = this.db.collection('scores');
+            const querySnapshot = await scoresRef.orderBy('score', 'desc').limit(10).get();
+
+            const topScores = [];
+            querySnapshot.forEach((doc) => {
+                const data = doc.data();
+                topScores.push(data);
+            });
+
+            return topScores;
+        } catch (error) {
+            console.error('Error retrieving top scores:', error);
+            return [];
+        }
+    }
+
+
 }
 
 document.myGame = new Game();
+
+// Assuming you have already created an instance of your game
+const myGame = document.myGame;
+
+// Calling the getTopScores function and logging the results
+myGame.getTopScores()
+    .then(topScores => {
+        console.log('Top Scores:', topScores);
+    })
+    .catch(error => {
+        console.error('Error while retrieving top scores:', error);
+    });
+
+
