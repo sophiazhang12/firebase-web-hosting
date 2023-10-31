@@ -63,6 +63,9 @@ class Game {
             this.ctx.fillStyle = "red";
             this.ctx.fillText("Game Over", this.canvas.width / 2 - 70, this.canvas.height / 2);
         
+            // Display the scoreboard at the end of the game
+            this.populateScoreboard();
+
             const initialsInput = document.getElementById('initialsInput');
             initialsInput.style.display = 'block';
             initialsInput.focus();
@@ -241,25 +244,46 @@ class Game {
         this.animationFrameId = requestAnimationFrame(() => this.update());
     }
 
-    // Function to retrieve the top 10 scores from Firestore
     async getTopScores() {
         try {
-            // Query Firestore to get the top 10 scores ordered by score in descending order
-            const scoresRef = this.db.collection('scores');
-            const querySnapshot = await scoresRef.orderBy('score', 'desc').limit(10).get();
+            const scores = await this.db.collection('scores')
+                .orderBy('score', 'desc')
+                .limit(10)
+                .get();
 
-            const topScores = [];
-            querySnapshot.forEach((doc) => {
-                const data = doc.data();
-                topScores.push(data);
-            });
-
+            const topScores = scores.docs.map(doc => doc.data());
             return topScores;
         } catch (error) {
             console.error('Error retrieving top scores:', error);
             return [];
         }
     }
+
+    //gets top scores from firebase and populates scoreboard
+    async populateScoreboard() {
+        const topScores = await this.getTopScores();
+        const scoreboardBody = document.getElementById('scoreboard-body');
+    
+        // Clear any previous scoreboard entries
+        scoreboardBody.innerHTML = '';
+    
+        // Loop through the top scores and create scoreboard entries
+        topScores.forEach((score, index) => {
+            const row = document.createElement('tr');
+            const rankCell = document.createElement('td');
+            const initialsCell = document.createElement('td');
+            const scoreCell = document.createElement('td');
+    
+            rankCell.textContent = index + 1;
+            initialsCell.textContent = score.initials;
+            scoreCell.textContent = score.score;
+    
+            row.appendChild(rankCell);
+            row.appendChild(initialsCell);
+            row.appendChild(scoreCell);
+            scoreboardBody.appendChild(row);
+        });
+    }    
 
 
 }
@@ -269,13 +293,15 @@ document.myGame = new Game();
 // Assuming you have already created an instance of your game
 const myGame = document.myGame;
 
-// Calling the getTopScores function and logging the results
-myGame.getTopScores()
-    .then(topScores => {
+//gets top scores from firebase and fills up the scoreboard, then updates it periodically
+setInterval(() => {
+    myGame.populateScoreboard()
+      .then(topScores => {
         console.log('Top Scores:', topScores);
-    })
-    .catch(error => {
+      })
+      .catch(error => {
         console.error('Error while retrieving top scores:', error);
-    });
+      });
+  }, 5000); // Refresh the scoreboard every 5 seconds (adjust as needed)
 
 
