@@ -285,7 +285,6 @@ class Game {
         });
     }    
 
-
 }
 
 document.myGame = new Game();
@@ -293,6 +292,23 @@ document.myGame = new Game();
 // Assuming you have already created an instance of your game
 const myGame = document.myGame;
 
+// //authentication stuff
+//     // User registration
+//     function registerUser(email, password) {
+//         return firebase.auth().createUserWithEmailAndPassword(email, password);
+//       }
+      
+//       // User login
+//       function loginUser(email, password) {
+//         return firebase.auth().signInWithEmailAndPassword(email, password);
+//       }
+      
+//       // User logout
+//       function logoutUser() {
+//         return firebase.auth().signOut();
+//       }
+  
+      
 //gets top scores from firebase and fills up the scoreboard, then updates it periodically
 setInterval(() => {
     myGame.populateScoreboard()
